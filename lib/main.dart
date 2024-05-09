@@ -10,8 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // Definimos la ruta inicial
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => const HomeScreen(),
+        'formulario': (BuildContext context) => const FormScreen(),
+      }
     );
   }
 }

@@ -5,11 +5,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Formulario'),
       ),
       body: const _HomeScreenView(),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.person),
+        label: const Text("Registrar paciente"),
+        onPressed: () => Navigator.pushNamed(context, 'formulario'),),
     );
   }
 }
