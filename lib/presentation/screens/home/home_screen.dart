@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/form/form_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +17,10 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.person),
         label: const Text("Registrar paciente"),
-        onPressed: () => Navigator.pushNamed(context, 'formulario'),),
+        onPressed: () {
+          Navigator.pushNamed(context, 'formulario');
+        } ,
+    )
     );
   }
 }
@@ -24,8 +30,18 @@ class _HomeScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Bienvenidos"),
+
+    final formCubit = context.watch<FormCubit>();
+
+    return Center(
+      child: ListView.builder(
+          itemCount: formCubit.state.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text('Nombre: ${formCubit.state[index]["nombre"]}'),
+            );
+          },
+        ),
     );
   }
 }
