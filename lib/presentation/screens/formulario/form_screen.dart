@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formulario/presentation/widgets/widgets.dart';
 
 class FormScreen extends StatelessWidget {
   const FormScreen({super.key});
@@ -8,10 +9,11 @@ class FormScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Formulario"),
+        backgroundColor: Colors.cyan,
       ),
       body: const FormScreenView(),
       floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.arrow_back_ios),
+        icon: const Icon(Icons.arrow_back_rounded),
         label: const Text("Regresar"),
         onPressed: () => Navigator.pop(context)),
     );
@@ -29,42 +31,36 @@ class FormScreenView extends StatefulWidget {
 class MyCustomFormState extends State<FormScreenView> {
 
   final TextEditingController _nombreController = TextEditingController();
+    final TextEditingController _ocupacionController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+    return Center(
+        child: ListView(
+          children: [
           const SizedBox(height: 10),
           Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-              // Add TextFormFields and ElevatedButton here.
-              const SizedBox(height: 50),
-                SizedBox(
-                  height: 100,
-                  width: 300,
-                  child: TextFormField(
-                    controller: _nombreController,
-                    maxLength: 40,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingrse un nombre válido';
-                      }
-                      return null;
-                    },
-                    decoration:  const InputDecoration(
-                      labelText: "Nombre",
-                      hintText: "Ingresa tu nombre",
-                      prefixIcon: Icon(Icons.person_2),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                // Add TextFormFields and ElevatedButton here.
+                const SizedBox(height: 60),
+                InputTextField(
+                  controller: _nombreController, 
+                  label: "Nombre", 
+                  maxLength: 45, 
+                  icon: const Icon(Icons.person),
                 ),
-                Text(_nombreController.text),
+                const SizedBox(height: 10),
+                InputTextField(
+                  controller: _ocupacionController, 
+                  label: "Ocupación", 
+                  maxLength: 30, 
+                  icon: const Icon(Icons.work)
+                ),
                 ElevatedButton(
                   onPressed: () {
                     // Validate returns true if the form is valid, or false otherwise.
@@ -79,13 +75,16 @@ class MyCustomFormState extends State<FormScreenView> {
                             onPressed: () {
                               // Some code to undo the change.
                               setState(() {
-                                _nombreController.text = "";
+                                _nombreController.value;
                               });
                             },
                           ),
                         ),
                       );
-                      setState(() {_nombreController.text;});
+                      setState(() {
+                        _nombreController.clear();
+                        _ocupacionController.clear();
+                        });
                     }
                   },
                   child: const Text('Registrar'),
@@ -94,7 +93,7 @@ class MyCustomFormState extends State<FormScreenView> {
             ),
           ),
         ],
-    );
-        
+      ) 
+    );   
   }
 }
