@@ -2,8 +2,8 @@ class Paciente{
 
   late int id;
   late String nombre;
-  late int edad;
-  late double altura;
+  late String edad;
+  late String altura;
   late String sexo;
 
   Paciente({

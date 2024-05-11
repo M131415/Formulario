@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:regexpattern/regexpattern.dart';
 
 class InputTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -27,7 +26,7 @@ class InputTextField extends StatelessWidget {
               controller: controller,
               maxLength: maxLength,
               validator: (value) {
-                if (value == null || value.isEmpty || value.isAlphabetNumericSymbol()) {
+                if (value == null || value.isEmpty) {
                   controller.clear();
                   return 'Por favor ingrese un texto válido';
                 }

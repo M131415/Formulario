@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formulario/domain/entities.dart';
+import 'package:formulario/presentation/blocs/form/form_cubit.dart';
 import 'package:formulario/presentation/widgets/widgets.dart';
 
 class FormScreen extends StatelessWidget {
@@ -12,6 +15,7 @@ class FormScreen extends StatelessWidget {
         backgroundColor: Colors.cyan,
       ),
       body: const FormScreenView(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.arrow_back_rounded),
         label: const Text("Regresar"),
@@ -31,12 +35,17 @@ class FormScreenView extends StatefulWidget {
 class MyCustomFormState extends State<FormScreenView> {
 
   final TextEditingController _nombreController = TextEditingController();
-    final TextEditingController _ocupacionController = TextEditingController();
+  final TextEditingController _edadController = TextEditingController();
+  final TextEditingController _alturaController = TextEditingController();
+  final TextEditingController _sexoController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+
+    final formCubit = context.watch<FormCubit>();
+
     return Center(
         child: ListView(
           children: [
@@ -56,15 +65,31 @@ class MyCustomFormState extends State<FormScreenView> {
                 ),
                 const SizedBox(height: 10),
                 InputTextField(
-                  controller: _ocupacionController, 
-                  label: "Ocupación", 
-                  maxLength: 30, 
+                  controller: _edadController, 
+                  label: "Edad", 
+                  maxLength: 3, 
+                  icon: const Icon(Icons.work)
+                ),
+                InputTextField(
+                  controller: _alturaController, 
+                  label: "Altura", 
+                  maxLength: 45, 
+                  icon: const Icon(Icons.person),
+                ),
+                const SizedBox(height: 10),
+                InputTextField(
+                  controller: _sexoController, 
+                  label: "Sexo", 
+                  maxLength: 10, 
                   icon: const Icon(Icons.work)
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
+
+                      formCubit.insertContacto(_agregarPaciente());
+
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -74,17 +99,12 @@ class MyCustomFormState extends State<FormScreenView> {
                             label: 'Deshacer',
                             onPressed: () {
                               // Some code to undo the change.
-                              setState(() {
-                                _nombreController.value;
-                              });
+                              //setState(() {});
                             },
                           ),
                         ),
                       );
-                      setState(() {
-                        _nombreController.clear();
-                        _ocupacionController.clear();
-                        });
+                      //setState(() {});
                     }
                   },
                   child: const Text('Registrar'),
@@ -95,5 +115,17 @@ class MyCustomFormState extends State<FormScreenView> {
         ],
       ) 
     );   
+  }
+  Paciente _agregarPaciente(){
+    String nombre = _nombreController.text;
+    String edad = _edadController.text;
+    String altura = _alturaController.text;
+    String sexo = _sexoController.text;
+
+    Paciente nuevoPaciente = Paciente(id: 122, nombre: nombre, edad: edad, altura: altura, sexo: sexo);
+    _edadController.clear();
+    _alturaController.clear();
+    _sexoController.clear();
+    return nuevoPaciente;
   }
 }
