@@ -10,6 +10,10 @@ class FormScreen extends StatelessWidget {
         title: const Text("Formulario"),
       ),
       body: const FormScreenView(),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.arrow_back_ios),
+        label: const Text("Regresar"),
+        onPressed: () => Navigator.pop(context)),
     );
   }
 }
