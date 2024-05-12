@@ -15,10 +15,9 @@ class FormScreen extends StatelessWidget {
         backgroundColor: Colors.cyan,
       ),
       body: const FormScreenView(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.arrow_back_rounded),
-        label: const Text("Regresar"),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back_ios_new),
         onPressed: () => Navigator.pop(context)),
     );
   }

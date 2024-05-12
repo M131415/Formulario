@@ -31,17 +31,19 @@ class _HomeScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final formCubit = context.watch<FormCubit>();
-
     return Center(
-      child: ListView.builder(
-          itemCount: formCubit.state.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text('Nombre: ${formCubit.state[index]["nombre"]}'),
-            );
+      child: BlocBuilder<FormCubit, List<Map<String,dynamic>>>(
+          builder: (context, estado) {
+            return ListView.builder(
+            itemCount: estado.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(estado[index]["nombre"]),
+              );
+            },
+          );
           },
-        ),
+      )
     );
   }
 }
