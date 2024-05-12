@@ -1,0 +1,1 @@
+ List<Map<String, dynamic>> miLista = [{"nombre": "Mau"}];
