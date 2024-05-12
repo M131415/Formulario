@@ -12,7 +12,7 @@ class FormScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Formulario"),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.purple[200],
       ),
       body: const FormScreenView(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
@@ -63,24 +63,24 @@ class MyCustomFormState extends State<FormScreenView> {
                   icon: const Icon(Icons.person),
                 ),
                 const SizedBox(height: 10),
-                InputTextField(
+                InputNumField(
                   controller: _edadController, 
                   label: "Edad", 
                   maxLength: 3, 
-                  icon: const Icon(Icons.work)
+                  icon: const Icon(Icons.calendar_today)
                 ),
-                InputTextField(
+                InputNumField(
                   controller: _alturaController, 
-                  label: "Altura", 
+                  label: "Altura (cm)", 
                   maxLength: 45, 
-                  icon: const Icon(Icons.person),
+                  icon: const Icon(Icons.height_sharp),
                 ),
                 const SizedBox(height: 10),
                 InputTextField(
                   controller: _sexoController, 
                   label: "Sexo", 
                   maxLength: 10, 
-                  icon: const Icon(Icons.work)
+                  icon: const Icon(Icons.directions_walk)
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -98,12 +98,10 @@ class MyCustomFormState extends State<FormScreenView> {
                             label: 'Deshacer',
                             onPressed: () {
                               // Some code to undo the change.
-                              //setState(() {});
                             },
                           ),
                         ),
                       );
-                      //setState(() {});
                     }
                   },
                   child: const Text('Registrar'),

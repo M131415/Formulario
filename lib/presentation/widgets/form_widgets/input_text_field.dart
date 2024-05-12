@@ -17,6 +17,12 @@ class InputTextField extends StatelessWidget {
     }
   );
 
+  bool validatorString(String value){
+
+    
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,7 +33,6 @@ class InputTextField extends StatelessWidget {
               maxLength: maxLength,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  controller.clear();
                   return 'Por favor ingrese un texto válido';
                 }
                 return null;

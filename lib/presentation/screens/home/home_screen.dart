@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Formulario'),
+        title: const Text('Lista de Pacientes'),
       ),
       body: const _HomeScreenView(),
       floatingActionButton: FloatingActionButton.extended(
@@ -33,12 +33,26 @@ class _HomeScreenView extends StatelessWidget {
 
     return Center(
       child: BlocBuilder<FormCubit, List<Map<String,dynamic>>>(
-          builder: (context, estado) {
+          builder: (context, state) {
             return ListView.builder(
-            itemCount: estado.length,
+            itemCount: state.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(estado[index]["nombre"]),
+                title: Text(state[index]["nombre"]),
+                trailing: Row
+                (
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () => {},
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () => {},
+                    ),
+                  ],
+                ),
               );
             },
           );
