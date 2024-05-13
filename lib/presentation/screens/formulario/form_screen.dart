@@ -33,10 +33,10 @@ class FormScreenView extends StatefulWidget {
 
 class MyCustomFormState extends State<FormScreenView> {
 
-  final TextEditingController _nombreController = TextEditingController();
-  final TextEditingController _edadController = TextEditingController();
-  final TextEditingController _alturaController = TextEditingController();
-  final TextEditingController _sexoController = TextEditingController();
+  final TextEditingController _nombreCtrl = TextEditingController();
+  final TextEditingController _edadCtrl = TextEditingController();
+  final TextEditingController _alturaCtrl = TextEditingController();
+  final TextEditingController _sexoCtrl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -57,38 +57,37 @@ class MyCustomFormState extends State<FormScreenView> {
                 // Add TextFormFields and ElevatedButton here.
                 const SizedBox(height: 60),
                 InputTextField(
-                  controller: _nombreController, 
+                  controller: _nombreCtrl, 
                   label: "Nombre", 
                   maxLength: 45, 
                   icon: const Icon(Icons.person),
                 ),
                 const SizedBox(height: 10),
                 InputNumField(
-                  controller: _edadController, 
+                  controller: _edadCtrl, 
                   label: "Edad", 
                   maxLength: 3, 
                   icon: const Icon(Icons.calendar_today)
                 ),
                 InputNumField(
-                  controller: _alturaController, 
+                  controller: _alturaCtrl, 
                   label: "Altura (cm)", 
                   maxLength: 45, 
                   icon: const Icon(Icons.height_sharp),
                 ),
                 const SizedBox(height: 10),
                 InputTextField(
-                  controller: _sexoController, 
+                  controller: _sexoCtrl, 
                   label: "Sexo", 
                   maxLength: 10, 
                   icon: const Icon(Icons.directions_walk)
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
-
-                      formCubit.insertContacto(_agregarPaciente());
-
+                      final mau = Paciente(id: 122, nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), sexo: _sexoCtrl.text.trim());
+                      formCubit.insertPaciente(mau);
+                      _formKey.currentState!.reset();
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -112,17 +111,5 @@ class MyCustomFormState extends State<FormScreenView> {
         ],
       ) 
     );   
-  }
-  Paciente _agregarPaciente(){
-    String nombre = _nombreController.text;
-    String edad = _edadController.text;
-    String altura = _alturaController.text;
-    String sexo = _sexoController.text;
-
-    Paciente nuevoPaciente = Paciente(id: 122, nombre: nombre, edad: edad, altura: altura, sexo: sexo);
-    _edadController.clear();
-    _alturaController.clear();
-    _sexoController.clear();
-    return nuevoPaciente;
   }
 }

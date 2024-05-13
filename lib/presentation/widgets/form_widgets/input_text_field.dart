@@ -7,21 +7,14 @@ class InputTextField extends StatelessWidget {
   final Icon icon;
   final bool autofocus;
 
-  const InputTextField(
-    {super.key, 
+  const InputTextField({
+    super.key, 
     required this.controller, 
     required this.label,
     required this.maxLength, 
     required this.icon, 
-    this.autofocus = false,
-    }
-  );
-
-  bool validatorString(String value){
-
-    
-    return true;
-  }
+    this.autofocus = false,  
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +24,8 @@ class InputTextField extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               maxLength: maxLength,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor ingrese un texto válido';
-                }
-                return null;
-              },
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: _validatorText,
               decoration: InputDecoration(
                 labelText: label,
                 hintText: "Ingrese su $label",
@@ -45,5 +34,14 @@ class InputTextField extends StatelessWidget {
               ),
             ),
           );
+  }
+
+
+  String? _validatorText(String? value){
+
+    if(value == null || value.trim().isEmpty){
+      return "Hola bbcito";
+    }
+    return null;
   }
 }

@@ -6,7 +6,7 @@ class FormCubit extends Cubit<List<Map<String,dynamic>>>{
 
   FormCubit():super(miLista);
 
-   void insertContacto(Paciente paciente) {
+   void insertPaciente(Paciente paciente) {
     state.add(paciente.toMap());
     emit(List.from(state));
   }
