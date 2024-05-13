@@ -1,1 +1,1 @@
- List<Map<String, dynamic>> miLista = [{"nombre": "Mau"}];
+ List<Map<String, dynamic>> miLista = [{"id": "1","nombre": "Mau"}];

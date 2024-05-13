@@ -39,6 +39,7 @@ class _HomeScreenView extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(state[index]["nombre"]),
+                subtitle: Text(state[index]["id"]),
                 trailing: Row
                 (
                   mainAxisSize: MainAxisSize.min,

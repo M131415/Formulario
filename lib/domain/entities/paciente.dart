@@ -1,6 +1,6 @@
 class Paciente{
 
-  late int id;
+  late String id;
   late String nombre;
   late String edad;
   late String altura;
@@ -18,6 +18,7 @@ class Paciente{
   //La clave primaria id se genera de forma automática
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'nombre': nombre,
       'edad': edad,
       'altura': altura,

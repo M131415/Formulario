@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formulario/domain/entities.dart';
 import 'package:formulario/presentation/blocs/form/form_cubit.dart';
 import 'package:formulario/presentation/widgets/widgets.dart';
+import 'package:uuid/uuid.dart';
 
 class FormScreen extends StatelessWidget {
   const FormScreen({super.key});
@@ -32,6 +33,8 @@ class FormScreenView extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<FormScreenView> {
+
+  var id = const Uuid();
 
   final TextEditingController _nombreCtrl = TextEditingController();
   final TextEditingController _edadCtrl = TextEditingController();
@@ -85,8 +88,8 @@ class MyCustomFormState extends State<FormScreenView> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      final mau = Paciente(id: 122, nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), sexo: _sexoCtrl.text.trim());
-                      formCubit.insertPaciente(mau);
+                      final paciente = Paciente(id: id.v8(), nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), sexo: _sexoCtrl.text.trim());
+                      formCubit.insertPaciente(paciente);
                       _formKey.currentState!.reset();
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
@@ -97,6 +100,7 @@ class MyCustomFormState extends State<FormScreenView> {
                             label: 'Deshacer',
                             onPressed: () {
                               // Some code to undo the change.
+                              paciente.altura;
                             },
                           ),
                         ),
