@@ -31,17 +31,18 @@ class _HomeScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final formCubit = context.watch<FormCubit>();
+
     return Center(
       child: BlocBuilder<FormCubit, List<Map<String,dynamic>>>(
-          builder: (context, state) {
-            return ListView.builder(
+        builder: (context, state) {
+          return ListView.builder(
             itemCount: state.length,
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(state[index]["nombre"]),
                 subtitle: Text(state[index]["id"]),
-                trailing: Row
-                (
+                trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
@@ -50,14 +51,14 @@ class _HomeScreenView extends StatelessWidget {
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
-                      onPressed: () => {},
+                      onPressed: ()=>{formCubit.deletePaciente(state[index]["id"])},
                     ),
                   ],
                 ),
               );
             },
           );
-          },
+        },
       )
     );
   }
