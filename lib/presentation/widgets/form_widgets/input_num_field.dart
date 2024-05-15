@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputNumField extends StatelessWidget {
   final TextEditingController controller;
@@ -17,12 +18,6 @@ class InputNumField extends StatelessWidget {
     }
   );
 
-  bool validatorString(String value){
-
-    
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,12 +27,10 @@ class InputNumField extends StatelessWidget {
               controller: controller,
               maxLength: maxLength,
               keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor ingrese un texto válido';
-                }
-                return null;
-              },
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              validator: _validatorText,
               decoration: InputDecoration(
                 labelText: label,
                 hintText: "Ingrese su $label",
@@ -47,4 +40,13 @@ class InputNumField extends StatelessWidget {
             ),
           );
   }
+
+String? _validatorText(String? value){
+
+    if(value == null || value.trim().isEmpty){
+      return "Por favor, ingrese un texto válido";
+    }
+    return null;
+  }
+
 }

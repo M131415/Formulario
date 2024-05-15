@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -26,6 +27,9 @@ class InputTextField extends StatelessWidget {
               maxLength: maxLength,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: _validatorText,
+              inputFormatters: [
+                FilteringTextInputFormatter.singleLineFormatter
+              ],
               decoration: InputDecoration(
                 labelText: label,
                 hintText: "Ingrese su $label",
@@ -40,7 +44,7 @@ class InputTextField extends StatelessWidget {
   String? _validatorText(String? value){
 
     if(value == null || value.trim().isEmpty){
-      return "Hola bbcito";
+      return "Por favor, ingrese un texto válido";
     }
     return null;
   }
