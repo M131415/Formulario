@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formulario/presentation/blocs/blocs.dart';
+import 'package:formulario/blocs/blocs.dart';
 import 'package:formulario/presentation/screens/screens.dart';
 
 void main() {

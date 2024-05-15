@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formulario/data/data.dart';
 import 'package:formulario/domain/entities/paciente.dart';
-import 'package:formulario/presentation/data/data.dart';
 
 class FormCubit extends Cubit<List<Map<String,dynamic>>>{
 
