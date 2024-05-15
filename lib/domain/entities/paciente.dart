@@ -4,14 +4,14 @@ class Paciente{
   late String nombre;
   late String edad;
   late String altura;
-  late String sexo;
+  late String ocupacion;
 
   Paciente({
     required this.id,
     required this.nombre, 
     required this.edad, 
     required this.altura,
-    required this.sexo,
+    required this.ocupacion,
     });
 
   // Convertir un Paciente a un mapa para la inserción en la base de datos
@@ -22,7 +22,7 @@ class Paciente{
       'nombre': nombre,
       'edad': edad,
       'altura': altura,
-      'sexo': sexo,
+      'ocupacion': ocupacion,
     };
   }
 
@@ -31,9 +31,9 @@ class Paciente{
   Paciente.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     nombre = map['nombre'];
-    edad = map['telefono'];
-    altura = map['nombre'];
-    sexo = map['telefono'];
+    edad = map['edad'];
+    altura = map['altura'];
+    ocupacion = map['ocupacion'];
   }
 
 }

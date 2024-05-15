@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formulario/blocs/blocs.dart';
 import 'package:formulario/domain/entities.dart';
 import 'package:formulario/presentation/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../blocs/blocs.dart';
 
 class FormScreenView extends StatefulWidget {
   const FormScreenView({super.key});
@@ -22,7 +22,7 @@ class MyCustomFormState extends State<FormScreenView> {
   final TextEditingController _nombreCtrl = TextEditingController();
   final TextEditingController _edadCtrl = TextEditingController();
   final TextEditingController _alturaCtrl = TextEditingController();
-  final TextEditingController _sexoCtrl = TextEditingController();
+  final TextEditingController _ocupacionCtrl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -30,7 +30,6 @@ class MyCustomFormState extends State<FormScreenView> {
   Widget build(BuildContext context) {
 
     final formCubit = context.watch<FormCubit>();
-
     return Center(
         child: ListView(
           children: [
@@ -53,25 +52,29 @@ class MyCustomFormState extends State<FormScreenView> {
                   controller: _edadCtrl, 
                   label: "Edad", 
                   maxLength: 3, 
-                  icon: const Icon(Icons.calendar_today)
+                  icon: const Icon(Icons.calendar_today),
+                  numeroMaximo: 125,
+                  numeroMinimo: 5,
                 ),
                 InputNumField(
                   controller: _alturaCtrl, 
                   label: "Altura (cm)", 
                   maxLength: 45, 
                   icon: const Icon(Icons.height_sharp),
+                  numeroMaximo: 251,
+                  numeroMinimo: 50,
                 ),
                 const SizedBox(height: 10),
                 InputTextField(
-                  controller: _sexoCtrl, 
-                  label: "Sexo", 
+                  controller: _ocupacionCtrl, 
+                  label: "Ocupación", 
                   maxLength: 10, 
-                  icon: const Icon(Icons.directions_walk)
+                  icon: const Icon(Icons.work)
                 ),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      final paciente = Paciente(id: id.v8(), nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), sexo: _sexoCtrl.text.trim());
+                      final paciente = Paciente(id: id.v8(), nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), ocupacion: _ocupacionCtrl.text.trim());
                       formCubit.insertPaciente(paciente);
                       _formKey.currentState!.reset();
                       Navigator.pushNamed(context, '/');

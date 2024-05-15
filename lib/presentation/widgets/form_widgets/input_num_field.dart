@@ -5,6 +5,8 @@ class InputNumField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final int maxLength;
+  final int numeroMaximo;
+  final int numeroMinimo;
   final Icon icon;
   final bool autofocus;
 
@@ -14,7 +16,9 @@ class InputNumField extends StatelessWidget {
     required this.label,
     required this.maxLength, 
     required this.icon, 
-    this.autofocus = false,
+    this.autofocus = false, 
+    required this.numeroMaximo,
+    required this.numeroMinimo,
     }
   );
 
@@ -26,6 +30,7 @@ class InputNumField extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               maxLength: maxLength,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly
@@ -41,10 +46,16 @@ class InputNumField extends StatelessWidget {
           );
   }
 
-String? _validatorText(String? value){
+  String? _validatorText(String? value){
 
     if(value == null || value.trim().isEmpty){
-      return "Por favor, ingrese un texto válido";
+      return "Por favor, ingrese un digito válido";
+    }
+    else if(value.isNotEmpty){
+      final int numero = int.parse(value);
+      if (numero >= numeroMaximo || numero <= numeroMinimo){
+        return "El digito esta fuera del rango máximo";
+      }
     }
     return null;
   }

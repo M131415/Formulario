@@ -40,8 +40,9 @@ class _HomeScreenView extends StatelessWidget {
             itemCount: state.length,
             itemBuilder: (context, index) {
               return ListTile(
+                leading: const Icon(Icons.person),
                 title: Text(state[index]["nombre"]),
-                subtitle: Text(state[index]["id"]),
+                subtitle: Text("${state[index]["edad"]} años"),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
