@@ -74,18 +74,12 @@ class MyCustomFormState extends State<FormScreenView> {
                       final paciente = Paciente(id: id.v8(), nombre: _nombreCtrl.text.trim(), edad: _edadCtrl.text.trim(), altura: _alturaCtrl.text.trim(), sexo: _sexoCtrl.text.trim());
                       formCubit.insertPaciente(paciente);
                       _formKey.currentState!.reset();
+                      Navigator.pushNamed(context, '/');
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text('Registrando usuario'),
-                          action: SnackBarAction(
-                            label: 'Deshacer',
-                            onPressed: () {
-                              // Some code to undo the change.
-                              paciente.altura;
-                            },
-                          ),
+                        const SnackBar(
+                          content: Text('Registrando usuario'),
                         ),
                       );
                     }
